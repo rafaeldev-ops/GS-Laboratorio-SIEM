@@ -73,7 +73,6 @@
         },
         "status": "bloqueado"
       }
-     }
      {
   "id_alerta": "ALT-005",
   "regra": "R005",
@@ -107,4 +106,3 @@
       "Monitorar tentativas recorrentes de exploração."
     ]
   }
-}
