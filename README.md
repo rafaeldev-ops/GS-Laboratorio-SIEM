@@ -1,130 +1,194 @@
-# SecuraPy — SIEM Simplificado 
+SecuraPy — SIEM Simplificado
 
-Disciplina: Coding for Security  
-Tipo: Trabalho Final Prático  
-Peso: 40% da nota final
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
+![License](https://img.shields.io/badge/License-MIT-green)
+![FIAP](https://img.shields.io/badge/FIAP-Coding%20for%20Security-red)
+![Status](https://img.shields.io/badge/Status-Funcional-brightgreen)
 
----
-
-Descrição do Projeto
-
-O **SecuraPy** é um SIEM (Security Information and Event Management) simplificado desenvolvido em Python. O sistema coleta, analisa e correlaciona eventos de segurança de múltiplas fontes de log em tempo real, detectando ataques como brute force, port scan e tentativas de invasão web.
+> **Trabalho Final Prático — Disciplina: Coding for Security | FIAP**  
+> Sistema SIEM educacional desenvolvido do zero em Python puro, sem dependência de ferramentas comerciais como Splunk ou ELK Stack.
 
 ---
 
-Integrantes e Divisão de Tarefas
+English Overview
 
-| Integrante | Módulos Responsável |
-|------------|---------------------|
-| Pessoa A   | `coletor.py` + arquivos de log de teste |
-| Pessoa B   | `regras.py` + `detector.py` + `config/regras.json` |
-| Pessoa C   | `servidor_alertas.py` + `cliente_alertas.py` |
-| Pessoa D   | `enriquecimento.py` + `relatorios.py` + `main.py` |
+**SecuraPy** is an educational SIEM (Security Information and Event Management) system built entirely in Python as a university final project for a *Coding for Security* course. It ingests three log source types, applies a JSON-configurable detection engine, correlates multi-event attack patterns, enriches IPs via geolocation API, and broadcasts real-time alerts over TCP sockets.
+
+**Skills demonstrated:** Python, TCP sockets, multithreading, log parsing, JSON-driven rule engine, REST API consumption, threat correlation, error handling, modular architecture.
+
+---
+
+Descrição
+
+O SecuraPy coleta, analisa e correlaciona eventos de segurança de múltiplas fontes de log em tempo real, detectando ataques como:
+
+- Brute Force em SSH/autenticação
+- Port Scan via análise de firewall
+- IPs em Blacklist conhecidos
+- Ataques Web — Path Traversal, XSS, SQLi, Reconhecimento
+
+---
+
+## 🏗️ Arquitetura
+
+```mermaid
+flowchart LR
+    subgraph Fontes["📂 Fontes de Log"]
+        A[auth.log]
+        B[firewall.log]
+        C[web_access.log]
+    end
+
+    subgraph Core["🧠 Motor SecuraPy"]
+        D[coletor.py\nNormalização]
+        E[regras.py\nMotor de Regras JSON]
+        F[detector.py\nCorrelação de Ameaças]
+        G[enriquecimento.py\nGeo IP + Cache]
+    end
+
+    subgraph Saida["📤 Saídas"]
+        H[servidor_alertas.py\nTCP Broadcast]
+        I[relatorios.py\nDashboard + JSON]
+    end
+
+    A & B & C --> D
+    D --> E --> F --> G
+    G --> H & I
+    H --> J[cliente_alertas.py]
+```
 
 ---
 
 Estrutura do Projeto
 
 ```
-securaPy/
-├── main.py                 # Ponto de entrada e menu principal
-├── coletor.py              # Módulo 1 — Leitura e parsing de logs
-├── regras.py               # Módulo 2 — Motor de regras de detecção
-├── detector.py             # Módulo 3 — Detecção de anomalias e ataques
-├── servidor_alertas.py     # Módulo 4 — Servidor TCP de alertas
-├── cliente_alertas.py      # Módulo 4 — Cliente TCP de alertas
-├── enriquecimento.py       # Módulo 5 — Consulta a APIs de threat intelligence
-├── relatorios.py           # Módulo 6 — Dashboard CLI e relatórios
-├── logs/
-│   ├── auth.log
-│   ├── firewall.log
-│   └── web_access.log
+GS-Laboratorio-SIEM/
+├── main.py                 # Ponto de entrada e orquestração
+├── coletor.py              # Módulo 1: Coleta e normalização de logs
+├── regras.py               # Módulo 2: Motor de regras configurável
+├── detector.py             # Módulo 3: Correlação e detecção
+├── servidor_alertas.py     # Módulo 4: Servidor TCP de alertas
+├── cliente_alertas.py      # Módulo 4: Cliente TCP de alertas
+├── enriquecimento.py       # Módulo 5: Geolocalização de IPs
+├── relatorios.py           # Módulo 6: Dashboard e exportação
+├── constantes.py           # Centraliza BLACKLIST e caminhos (sem duplicação)
 ├── config/
-│   └── regras.json
-├── saida/
-│   └── (relatórios gerados)
-└── README.md
+│   └── regras.json         # Regras de detecção R001–R005 (editável)
+├── logs/
+│   ├── auth.log            # Logs de autenticação (SSH, sudo)
+│   ├── firewall.log        # Logs de firewall (UFW/iptables)
+│   └── web_access.log      # Logs de acesso web (Apache/Nginx)
+├── saida/                  # Relatórios JSON exportados (no .gitignore)
+├── requirements.txt
+├── .gitignore
+└── LICENSE
 ```
 
 ---
 
-Como Executar:
+Início Rápido
 
 Pré-requisitos
 
-- Python 3.8 ou superior
-- Instalar dependência:
+- Python 3.8+
+- pip
+
+Instalação
 
 ```bash
-pip install requests
+git clone https://github.com/rafaeldev-ops/GS-Laboratorio-SIEM.git
+cd GS-Laboratorio-SIEM
+pip install -r requirements.txt
 ```
 
-Executar o sistema principal
+Execução
 
 ```bash
-cd securaPy
+# Sistema principal (análise + dashboard)
 python main.py
-```
 
-Executar o servidor de alertas separadamente
-
-```bash
-# Terminal 1 — Servidor
+# Servidor de alertas TCP (terminal 1)
 python servidor_alertas.py
 
-# Terminal 2 — Cliente 1
+# Cliente de alertas (terminal 2)
 python cliente_alertas.py
-
-# Terminal 3 — Cliente 2 (opcional)
-python cliente_alertas.py
-```
-
-Testar módulos individualmente
-
-```bash
-python coletor.py
-python regras.py
-python detector.py
-python enriquecimento.py
 ```
 
 ---
 
-Dados de Teste
+Detecções e Mapeamento MITRE ATT\&CK
 
-Os arquivos na pasta `logs/` contêm eventos simulados que ativam todas as detecções:
+| Regra | Nome | Técnica ATT&CK | Tática | Severidade |
+|-------|------|---------------|--------|------------|
+| R001 | Login de Usuário Privilegiado | [T1078](https://attack.mitre.org/techniques/T1078/) – Valid Accounts / [T1110](https://attack.mitre.org/techniques/T1110/) – Brute Force | Initial Access / Credential Access | 🔴 Alta |
+| R002 | Acesso a Porta Crítica | [T1046](https://attack.mitre.org/techniques/T1046/) – Network Service Discovery | Discovery | 🟡 Média |
+| R003 | Path Traversal | [T1190](https://attack.mitre.org/techniques/T1190/) – Exploit Public-Facing Application | Initial Access | 🔴 Alta |
+| R004 | XSS em Requisição Web | [T1190](https://attack.mitre.org/techniques/T1190/) – Exploit Public-Facing Application | Initial Access | 🟡 Média |
+| R005 | Reconhecimento Web (Scanner) | [T1595](https://attack.mitre.org/techniques/T1595/) – Active Scanning | Reconnaissance | 🟡 Média |
+| —    | Correlação: Brute Force | [T1110.001](https://attack.mitre.org/techniques/T1110/001/) – Password Guessing | Credential Access | 🔴 Alta |
+| —    | Correlação: Port Scan | [T1046](https://attack.mitre.org/techniques/T1046/) – Network Service Discovery | Discovery | 🔴 Alta |
+| —    | Blacklist de IPs | [T1090](https://attack.mitre.org/techniques/T1090/) – Proxy (Tor Exit Node) | Command and Control | 🔴 Alta |
 
-| Arquivo | Eventos | Ataques simulados |
-|---------|---------|-------------------|
-| `auth.log` | 23 linhas | Brute force em admin/root de IPs externos |
-| `firewall.log` | 17 linhas | Port scan varrendo portas críticas |
-| `web_access.log` | 18 linhas | Path traversal, XSS, reconhecimento web |
+> Mapeamentos baseados em MITRE ATT&CK v19 (abril de 2026).
 
-### IPs suspeitos nos logs
+---
 
-| IP | Tipo de ameaça |
+Dados de Exemplo
+
+Os arquivos em `logs/` contêm dados sintéticos realistas para demonstração:
+
+| Fonte | Conteúdo |
+|-------|----------|
+| `auth.log` | Brute force SSH contra root/admin, logins legítimos |
+| `firewall.log` | Port scan em portas críticas, tráfego bloqueado da blacklist |
+| `web_access.log` | Path traversal, XSS, SQLi, scanners Nikto/sqlmap/DirBuster |
+
+**IPs simulados:**
+
+| IP | Origem simulada |
 |----|----------------|
-| `185.220.101.1` | Brute force + Port scan + Blacklist |
-| `91.240.118.172` | Brute force + Port scan + Blacklist |
-| `45.33.32.156` | Port scan + Blacklist |
+| `185.220.101.1` | Nó de saída Tor (bloco 185.220.101.x/DE) |
+| `45.33.32.156` | Host de reconhecimento (referência: scanme.nmap.org) |
+| `91.240.118.172` | Host com histórico de varreduras |
+| `23.94.5.100` | Host associado a atividade de spam/scanning |
 
 ---
 
-Funcionalidades
+Configurando Regras
 
-1. **Carregar e processar logs** — lê as 3 fontes e normaliza eventos
-2. **Resumo geral** — visão consolidada com contadores
-3. **Filtrar eventos** — por fonte, tipo e IP
-4. **Buscar IP** — histórico completo de um IP específico
-5. **Top 10 IPs** — ranking dos IPs mais ativos com indicador de ameaça
-6. **Alertas por severidade** — CRITICA / ALTA / MEDIA / BAIXA / INFO
-7. **Enriquecimento** — geolocalização dos IPs via ipinfo.io
-8. **Exportar relatório** — JSON com todos os dados da análise
-9. **Servidor de alertas** — broadcast TCP em tempo real
+Edite `config/regras.json` para personalizar detecções sem modificar o código:
+
+```json
+{
+  "id": "R002",
+  "nome": "Acesso a Porta Crítica",
+  "condicao": "porta_critica",
+  "portas": [22, 23, 445, 3389, 3306, 5432, 1433],
+  "severidade": "media"
+}
+```
 
 ---
 
-Referências
+Limitações Conhecidas
 
-- [ipinfo.io API](https://ipinfo.io) — geolocalização de IPs
-- Python docs: `socket`, `threading`, `json`, `os`, `requests`
+- **Servidor de alertas escuta em `0.0.0.0:9999` sem autenticação** — adequado para laboratório local; não expor em ambientes de produção sem adicionar TLS e autenticação.
+- **Rate limit da ipinfo.io** — o módulo de enriquecimento trata o erro HTTP 429 com backoff, mas o plano gratuito tem limite de 50k req/mês. Substitua pela variável `IPINFO_TOKEN` para planos pagos.
+- **Reimplementação educacional** — este projeto reimplementa conceitos de SIEM do zero em Python. Não é um substituto para soluções corporativas como Wazuh, Elastic SIEM ou Splunk.
+
+---
+
+Equipe
+
+| Integrante | Módulo Principal |
+|-----------|-----------------|
+| Pessoa A | Coletor de Logs (Módulo 1) |
+| Pessoa B | Motor de Regras + Detector (Módulos 2 e 3) |
+| Pessoa C | Servidor/Cliente de Alertas (Módulo 4) |
+| Pessoa D | Enriquecimento + Relatórios (Módulos 5 e 6) |
+
+---
+
+Licença
+
+Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE) para mais detalhes.
