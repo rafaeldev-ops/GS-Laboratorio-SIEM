@@ -12,7 +12,7 @@
 
 ## English Overview
 
-**SecuraPy** is an educational SIEM (Security Information and Event Management) system built entirely in Python as a university final project for a *Coding for Security* course. It ingests three log source types, applies a JSON-configurable detection engine, correlates multi-event attack patterns, enriches IPs via geolocation API, and broadcasts real-time alerts over TCP sockets.
+**SecuraPy** is an educational SIEM (Security Information and Event Management) system built entirely in Python as a university project for a Coding for Security course. It ingests three log source types, applies a JSON-configurable detection engine, correlates multi-event attack patterns, enriches IPs via geolocation API, and broadcasts real-time alerts over TCP sockets.
 
 **Skills demonstrated:** Python, TCP sockets, multithreading, log parsing, JSON-driven rule engine, REST API consumption, threat correlation, error handling, modular architecture.
 
