@@ -1,0 +1,117 @@
+{
+  "relatorio": {
+    "versao": "1.1",
+    "data_geracao": "2025-06-22T21:30:00Z",
+    "sistema": "SecuraPy",
+    "total_alertas": 5,
+    "eventos_detectados": [
+      {
+        "id_alerta": "ALT-001",
+        "regra": "R001",
+        "nome": "Login de Usuário Privilegiado",
+        "severidade": "alta",
+        "timestamp": "2025-06-22T20:15:12Z",
+        "origem": {
+          "ip": "192.168.1.15",
+          "usuario": "root"
+        },
+        "descricao": "Tentativa de autenticação utilizando conta privilegiada.",
+        "mitre": {
+          "tecnica": "T1078 - Valid Accounts / T1110 - Brute Force",
+          "tatica": "Initial Access / Credential Access"
+        },
+        "status": "investigar"
+      },
+      {
+        "id_alerta": "ALT-002",
+        "regra": "R002",
+        "nome": "Acesso a Porta Crítica",
+        "severidade": "media",
+        "timestamp": "2025-06-22T20:21:44Z",
+        "origem": {
+          "ip": "10.0.0.25",
+          "porta": 3389
+        },
+        "descricao": "Conexão detectada para porta crítica RDP.",
+        "mitre": {
+          "tecnica": "T1046 - Network Service Discovery / T1595 - Active Scanning",
+          "tatica": "Discovery / Reconnaissance"
+        },
+        "status": "monitoramento"
+      },
+      {
+        "id_alerta": "ALT-003",
+        "regra": "R003",
+        "nome": "Tentativa de Path Traversal",
+        "severidade": "alta",
+        "timestamp": "2025-06-22T20:35:09Z",
+        "origem": {
+          "ip": "203.0.113.45",
+          "url": "/../../etc/passwd"
+        },
+        "descricao": "Padrão de path traversal identificado em requisição web.",
+        "mitre": {
+          "tecnica": "T1190 - Exploit Public-Facing Application",
+          "tatica": "Initial Access"
+        },
+        "status": "bloqueado"
+      },
+      {
+        "id_alerta": "ALT-004",
+        "regra": "R004",
+        "nome": "Tentativa de XSS",
+        "severidade": "alta",
+        "timestamp": "2025-06-22T20:47:33Z",
+        "origem": {
+          "ip": "198.51.100.88",
+          "url": "/search?q=<script>alert(1)</script>"
+        },
+        "descricao": "Payload de Cross-Site Scripting detectado.",
+        "mitre": {
+          "tecnica": "T1059 - Command and Scripting Interpreter",
+          "tatica": "Execution"
+        },
+        "status": "bloqueado"
+      }
+    ],
+    "resumo": {
+      "criticos": 0,
+      "altos": 3,
+      "medios": 1,
+      "baixos": 0
+    },
+    "recomendacoes": [
+      "Revisar acessos privilegiados.",
+      "Restringir exposição de portas críticas à Internet.",
+      "Aplicar validação e sanitização de entradas web.",
+      "Implementar WAF para proteção contra Path Traversal e XSS.",
+      "Monitorar tentativas recorrentes de exploração."
+    ]
+  }
+     }
+     {
+  "id_alerta": "ALT-005",
+  "regra": "R005",
+  "nome": "Reconhecimento Web",
+  "severidade": "media",
+  "timestamp": "2025-06-22T20:58:17Z",
+  "origem": {
+    "ip": "198.51.100.120",
+    "user_agent": "Nikto/2.5.0"
+  },
+  "descricao": "Ferramenta de reconhecimento identificada através do User-Agent da requisição HTTP.",
+  "mitre": {
+    "tecnica": "T1595 - Active Scanning / T1046 - Network Service Discovery",
+    "tatica": "Reconnaissance / Discovery"
+  },
+  "status": "monitoramento"
+}
+{
+  "resumo": {
+    "total_alertas": 5,
+    "criticos": 0,
+    "altos": 3,
+    "medios": 2,
+    "baixos": 0
+  }
+}
