@@ -1,4 +1,4 @@
-SecuraPy — SIEM Simplificado
+# SecuraPy — SIEM Simplificado
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -10,7 +10,7 @@ SecuraPy — SIEM Simplificado
 
 ---
 
-English Overview
+## 🇬🇧 English Overview
 
 **SecuraPy** is an educational SIEM (Security Information and Event Management) system built entirely in Python as a university final project for a *Coding for Security* course. It ingests three log source types, applies a JSON-configurable detection engine, correlates multi-event attack patterns, enriches IPs via geolocation API, and broadcasts real-time alerts over TCP sockets.
 
@@ -18,14 +18,14 @@ English Overview
 
 ---
 
-Descrição
+## 📋 Descrição
 
-O SecuraPy coleta, analisa e correlaciona eventos de segurança de múltiplas fontes de log em tempo real, detectando ataques como:
+O **SecuraPy** coleta, analisa e correlaciona eventos de segurança de múltiplas fontes de log em tempo real, detectando ataques como:
 
-- Brute Force em SSH/autenticação
-- Port Scan via análise de firewall
-- IPs em Blacklist conhecidos
-- Ataques Web — Path Traversal, XSS, SQLi, Reconhecimento
+- 🔐 **Brute Force** em SSH/autenticação
+- 🔍 **Port Scan** via análise de firewall
+- 🚫 **IPs em Blacklist** conhecidos
+- 🌐 **Ataques Web** — Path Traversal, XSS, SQLi, Reconhecimento
 
 ---
 
@@ -59,7 +59,7 @@ flowchart LR
 
 ---
 
-Estrutura do Projeto
+## 🗂️ Estrutura do Projeto
 
 ```
 GS-Laboratorio-SIEM/
@@ -86,14 +86,14 @@ GS-Laboratorio-SIEM/
 
 ---
 
-Início Rápido
+## ⚡ Início Rápido
 
-Pré-requisitos
+### Pré-requisitos
 
 - Python 3.8+
 - pip
 
-Instalação
+### Instalação
 
 ```bash
 git clone https://github.com/rafaeldev-ops/GS-Laboratorio-SIEM.git
@@ -101,7 +101,7 @@ cd GS-Laboratorio-SIEM
 pip install -r requirements.txt
 ```
 
-Execução
+### Execução
 
 ```bash
 # Sistema principal (análise + dashboard)
@@ -116,7 +116,7 @@ python cliente_alertas.py
 
 ---
 
-Detecções e Mapeamento MITRE ATT\&CK
+## 🛡️ Detecções e Mapeamento MITRE ATT\&CK
 
 | Regra | Nome | Técnica ATT&CK | Tática | Severidade |
 |-------|------|---------------|--------|------------|
@@ -133,7 +133,7 @@ Detecções e Mapeamento MITRE ATT\&CK
 
 ---
 
-Dados de Exemplo
+## 📊 Dados de Exemplo
 
 Os arquivos em `logs/` contêm dados sintéticos realistas para demonstração:
 
@@ -154,7 +154,7 @@ Os arquivos em `logs/` contêm dados sintéticos realistas para demonstração:
 
 ---
 
-Configurando Regras
+## ⚙️ Configurando Regras
 
 Edite `config/regras.json` para personalizar detecções sem modificar o código:
 
@@ -170,7 +170,7 @@ Edite `config/regras.json` para personalizar detecções sem modificar o código
 
 ---
 
-Limitações Conhecidas
+## ⚠️ Limitações Conhecidas
 
 - **Servidor de alertas escuta em `0.0.0.0:9999` sem autenticação** — adequado para laboratório local; não expor em ambientes de produção sem adicionar TLS e autenticação.
 - **Rate limit da ipinfo.io** — o módulo de enriquecimento trata o erro HTTP 429 com backoff, mas o plano gratuito tem limite de 50k req/mês. Substitua pela variável `IPINFO_TOKEN` para planos pagos.
@@ -178,7 +178,7 @@ Limitações Conhecidas
 
 ---
 
-Equipe
+## 👥 Equipe
 
 | Integrante | Módulo Principal |
 |-----------|-----------------|
@@ -189,6 +189,6 @@ Equipe
 
 ---
 
-Licença
+## 📄 Licença
 
 Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE) para mais detalhes.
