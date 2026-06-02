@@ -147,11 +147,11 @@ def avaliar_regra(regra, evento):
             if any(padrao in url for padrao in regra.get("padroes", [])):
                 violou = True
 
-    # ── R005: Reconhecimento web ──────────────────────────────────────────────
+   # ── R005: Reconhecimento web ──────────────────────────────────────────────
     elif condicao == "reconhecimento":
-        if "url=" in detalhes:
-            url = detalhes.split("url=")[1].split()[0]
-            if any(url_suspeita in url for url_suspeita in regra.get("urls_suspeitas", [])):
+        user_agent = evento.get("user_agent", "").lower()
+        if user_agent:
+            if any(scanner in user_agent for scanner in regra.get("urls_suspeitas", [])):
                 violou = True
 
     if not violou:
