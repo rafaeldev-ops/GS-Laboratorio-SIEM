@@ -1,7 +1,7 @@
 # SecuraPy — SIEM Simplificado 
 
 Disciplina: Coding for Security  
-Tipo:Trabalho Final Prático  
+Tipo: Trabalho Final Prático  
 Peso: 40% da nota final
 
 ---
