@@ -154,7 +154,7 @@ Os arquivos em `logs/` contêm dados sintéticos realistas para demonstração:
 
 ---
 
-## ⚙️ Configurando Regras
+## Configurando Regras
 
 Edite `config/regras.json` para personalizar detecções sem modificar o código:
 
@@ -189,6 +189,6 @@ Edite `config/regras.json` para personalizar detecções sem modificar o código
 
 ---
 
-## 📄 Licença
+## Licença
 
 Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE) para mais detalhes.
