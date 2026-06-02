@@ -180,11 +180,11 @@ Edite `config/regras.json` para personalizar detecções sem modificar o código
 ## Equipe
 
 | Integrante | Módulo Principal |
-|-----------|-----------------|
-| Pessoa A | Coletor de Logs (Módulo 1) |
-| Pessoa B | Motor de Regras + Detector (Módulos 2 e 3) |
-| Pessoa C | Servidor/Cliente de Alertas (Módulo 4) |
-| Pessoa D | Enriquecimento + Relatórios (Módulos 5 e 6) |
+|------------|-----------------|
+| Caio       | Coletor de Logs (Módulo 1) |
+| Rafael     | Motor de Regras + Detector (Módulos 2 e 3) |
+| Raul       | Servidor/Cliente de Alertas (Módulo 4) |
+| Nicolas    | Enriquecimento + Relatórios (Módulos 5 e 6) |
 
 ---
 
