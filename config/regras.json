@@ -1,0 +1,70 @@
+{
+  "versao": "1.1",
+  "descricao": "Regras de detecção do SecuraPy — cobertura das 5 regras base",
+  "regras": [
+    {
+      "id": "R001",
+      "nome": "Login de Usuário Privilegiado",
+      "descricao": "Detecta tentativas de login com contas privilegiadas (root, admin, administrator).",
+      "condicao": "usuario_privilegiado",
+      "severidade": "alta",
+      "tags": ["T1078", "T1110", "T1110.001"],
+      "mitre": {
+        "tecnica": "T1078 – Valid Accounts / T1110 – Brute Force",
+        "tatica": "Initial Access / Credential Access"
+      }
+    },
+    {
+      "id": "R002",
+      "nome": "Acesso a Porta Crítica",
+      "descricao": "Detecta tráfego direcionado a portas sensíveis: SSH (22), RDP (3389), DB (3306, 5432, 1433), SMB (445), Telnet (23).",
+      "condicao": "porta_critica",
+      "portas": [22, 23, 445, 1433, 3306, 3389, 5432],
+      "severidade": "media",
+      "tags": ["T1046", "T1595"],
+      "mitre": {
+        "tecnica": "T1046 – Network Service Discovery / T1595 – Active Scanning",
+        "tatica": "Discovery / Reconnaissance"
+      }
+    },
+    {
+      "id": "R003",
+      "nome": "Tentativa de Path Traversal",
+      "descricao": "Detecta padrões de path traversal em requisições web (../, %2e%2e, etc.).",
+      "condicao": "path_traversal",
+      "padroes": ["../", "..\\", "%2e%2e", "%252e"],
+      "severidade": "alta",
+      "tags": ["T1190"],
+      "mitre": {
+        "tecnica": "T1190 – Exploit Public-Facing Application",
+        "tatica": "Initial Access"
+      }
+    },
+    {
+      "id": "R004",
+      "nome": "Tentativa de XSS",
+      "descricao": "Detecta payloads de Cross-Site Scripting em parâmetros de requisição web.",
+      "condicao": "xss",
+      "padroes": ["<script", "javascript:", "onerror=", "onload=", "alert(", "document.cookie"],
+      "severidade": "media",
+      "tags": ["T1190"],
+      "mitre": {
+        "tecnica": "T1190 – Exploit Public-Facing Application",
+        "tatica": "Initial Access"
+      }
+    },
+    {
+      "id": "R005",
+      "nome": "Reconhecimento Web",
+      "descricao": "Detecta user-agents e padrões associados a scanners e ferramentas de reconhecimento (nikto, sqlmap, nmap, dirbuster, masscan, zgrab).",
+      "condicao": "reconhecimento",
+      "user_agents": ["nikto", "sqlmap", "nmap", "dirbuster", "masscan", "zgrab", "gobuster", "wfuzz"],
+      "severidade": "media",
+      "tags": ["T1595", "T1046"],
+      "mitre": {
+        "tecnica": "T1595 – Active Scanning / T1046 – Network Service Discovery",
+        "tatica": "Reconnaissance / Discovery"
+      }
+    }
+  ]
+}
