@@ -71,7 +71,6 @@ GS-Laboratorio-SIEM/
 ├── cliente_alertas.py      # Módulo 4: Cliente TCP de alertas
 ├── enriquecimento.py       # Módulo 5: Geolocalização de IPs
 ├── relatorios.py           # Módulo 6: Dashboard e exportação
-├── constantes.py           # Centraliza BLACKLIST e caminhos (sem duplicação)
 ├── config/
 │   └── regras.json         # Regras de detecção R001–R005 (editável)
 ├── logs/
