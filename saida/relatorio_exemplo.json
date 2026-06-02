@@ -73,21 +73,6 @@
         },
         "status": "bloqueado"
       }
-    ],
-    "resumo": {
-      "criticos": 0,
-      "altos": 3,
-      "medios": 1,
-      "baixos": 0
-    },
-    "recomendacoes": [
-      "Revisar acessos privilegiados.",
-      "Restringir exposição de portas críticas à Internet.",
-      "Aplicar validação e sanitização de entradas web.",
-      "Implementar WAF para proteção contra Path Traversal e XSS.",
-      "Monitorar tentativas recorrentes de exploração."
-    ]
-  }
      }
      {
   "id_alerta": "ALT-005",
@@ -113,5 +98,14 @@
     "altos": 3,
     "medios": 2,
     "baixos": 0
+  }
+},
+"recomendacoes": [
+      "Revisar acessos privilegiados.",
+      "Restringir exposição de portas críticas à Internet.",
+      "Aplicar validação e sanitização de entradas web.",
+      "Implementar WAF para proteção contra Path Traversal e XSS.",
+      "Monitorar tentativas recorrentes de exploração."
+    ]
   }
 }
