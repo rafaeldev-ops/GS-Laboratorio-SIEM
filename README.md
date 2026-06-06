@@ -177,8 +177,6 @@ Edite `config/regras.json` para personalizar detecções sem modificar o código
 
 ---
 
----
-
 ## Licença
 
 Distribuído sob a licença MIT. Veja [`LICENSE`](LICENSE) para mais detalhes.
