@@ -177,15 +177,6 @@ Edite `config/regras.json` para personalizar detecções sem modificar o código
 
 ---
 
-## Equipe
-
-| Integrante | Responsabilidade | Módulos |
-|-----------|-----------------|---------|
-| Caio | Coleta e parsing de dados | Módulo 1 (coletor.py) + arquivos de log de teste |
-| Rafael | Inteligência e detecção | Módulo 2 (regras.py) + Módulo 3 (detector.py) + regras.json |
-| Raul | Comunicação em rede | Módulo 4 (servidor_alertas.py + cliente_alertas.py) |
-| Nicolas | Interface e integração | Módulo 5 (enriquecimento.py) + Módulo 6 (relatorios.py) + main.py |
-
 ---
 
 ## Licença
