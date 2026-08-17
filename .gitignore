@@ -29,3 +29,26 @@ Thumbs.db
 # Credenciais / variáveis de ambiente
 .env
 *.key
+
+# Este repositório fica na raiz do perfil do usuário (C:\Users\Kani), então
+# tudo que o Windows e as ferramentas guardam no HOME cai dentro da árvore de
+# trabalho. As pastas abaixo contêm credenciais em texto puro (chaves SSH,
+# tokens de API, memórias e configuração dos agentes) e um `git add -A` daqui
+# publicaria todas elas no GitHub. Nada disso pertence a este projeto.
+.ssh/
+.aws/
+.gnupg/
+.claude/
+.claude.json
+.claude.json.backup
+.codex/
+.cagent/
+.copilot/
+.cursor/
+.config/
+.docker/
+.local/
+.cache/
+AppData/
+NTUSER.DAT*
+ntuser.dat*
